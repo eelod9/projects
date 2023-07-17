@@ -1,0 +1,44 @@
+body {
+    background-image: url("pink.jpg");
+    background-size:cover;
+    text-align: center;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    height: 100vh;
+}
+
+.container {
+    background: white;
+    max-width: 80%;
+    margin:auto;
+    border: 5px solid rgb(223, 78, 121);
+    border-radius: 10px;
+    float:left;
+    padding: 2px 25px 25px 25px; /*top right bottom left*/
+    text-align: center;
+    
+}
+#result-age{
+    color:rgb(0, 89, 255);
+    font-weight: bold;
+
+}
+button {
+    border: 1px solid black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    width: 200px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    max-width: 100%;
+}
+#show-btn {
+    background: #e251ff;
+}
+ul {
+    list-style-type: none; /* Remove bullets */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margins */
+    font-size: xx-large;
+  }
