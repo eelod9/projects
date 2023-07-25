@@ -108,7 +108,7 @@ class person {
 
 
 let today = new Date();
-let myBirthday = new person("Ella", new Date(1992,3,9));
+let myBirthday = new person("Ella", new Date(1992,8,9));
 
 
 
@@ -120,13 +120,83 @@ let clara = new person("Clara",new Date(1966,6,20));
 let bdayArray = [myBirthday,dj,clara]
 //let age = getAge(myBirthday);
 
+let showBtn = document.getElementById("show-btn");
+let resultAge = document.getElementById("result-age");
 
 function show(){
-    let showBtn = document.getElementById("result-age")
-    showBtn.textContent = ""
-    for(var i = 0; i <bdayArray.length;i++){
-        let user = bdayArray[i];
-        let line = user.name + " ⚡ " + getAge(user.birthday);
-        showBtn.innerHTML += ('<li>' + line + '</li>'); //+"\n" + "DJ => " + getAge(dj) +"\n" + "Clara => " + getAge(clara) 
+   if(showBtn.textContent != "HIDE") {
+         resultAge.textContent = "";
+        for(var i = 0; i <bdayArray.length;i++){
+            let user = bdayArray[i];
+            let line = user.name + " ⚡ " + getAge(user.birthday);
+            resultAge.innerHTML += ('<li>' + line + '</li>'); //+"\n" + "DJ => " + getAge(dj) +"\n" + "Clara => " + getAge(clara) 
+        }
+        showBtn.textContent = "HIDE";
+        showBtn.style.background = "#40E0D0"
+    }
+    else{
+        hide();
+       
+    }
+}
+function hide(){
+    resultAge.textContent = "";
+    showBtn.textContent ="SHOW"
+    showBtn.style.background = "#e251ff"
+    
+}
+
+
+//Black Jack functions
+
+function getRandom(){
+    // Returns a random integer from 1 to 11:
+    let min = 1
+    let max = 11
+    return Math.floor(Math.random() * (max - min + 1) + min)
+}
+let messageEl = document.getElementById("message-el")
+let cardsEl = document.getElementById("cards-el");
+let sumEl    = document.getElementById("sum-el");
+console.log(cardsEl.textContent);
+let card =[];
+let sum = 0;
+function startGame(){
+    card =[];
+    cardsEl.textContent = "Cards: ";
+    let firstCard = getRandom();
+    let secondCard = getRandom();
+    card.push(firstCard);
+    card.push(secondCard);
+    checkGame();
+
+
+}
+function checkGame(){
+    cardsEl.textContent = "Cards:";
+    sum =0;
+    for (let i in card){
+        cardsEl.textContent += card[i] + " ";
+        sum += card[i]
+    }
+    sumEl.textContent = "Sum: " + sum;
+    if (sum === 21){
+        messageEl.textContent = "You won!!"
+        
+    }else if (sum >21){
+        messageEl.textContent = "Bust -_- You lose"
+        return "newGame"
+    }else{
+        messageEl.textContent = "Do you want to pick new card?"
+    }
+}
+
+function newCard(){
+    let newCard = getRandom();
+    card.push(newCard);
+    let result = checkGame();
+    if(result=== "newGame"){
+        messageEl.textContent = "Bust -_- You lose"
+        startGame();
     }
 }
