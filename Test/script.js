@@ -149,18 +149,34 @@ function hide(){
 
 //Black Jack functions
 
+let player1 = {
+    name: "Per",
+    chips: 145
+}
+let playerEl = document.getElementById("player-el");
+playerEl.textContent = player1.name + ": $" + player1.chips;
 function getRandom(){
     // Returns a random integer from 1 to 11:
     let min = 1
-    let max = 11
-    return Math.floor(Math.random() * (max - min + 1) + min)
+    let max = 13
+    let num = Math.floor(Math.random() * (max - min + 1) + min)
+    if (num === 1){
+        return 11;
+    }else if(num > 10){
+        return 10;
+    } else
+    {
+        return num;
+    }
 }
 let messageEl = document.getElementById("message-el")
 let cardsEl = document.getElementById("cards-el");
 let sumEl    = document.getElementById("sum-el");
-console.log(cardsEl.textContent);
+
 let card =[];
 let sum = 0;
+let started = false
+
 function startGame(){
     card =[];
     cardsEl.textContent = "Cards: ";
@@ -169,7 +185,7 @@ function startGame(){
     card.push(firstCard);
     card.push(secondCard);
     checkGame();
-
+    started = true;
 
 }
 function checkGame(){
@@ -182,21 +198,24 @@ function checkGame(){
     sumEl.textContent = "Sum: " + sum;
     if (sum === 21){
         messageEl.textContent = "You won!!"
-        
+        started = false;
     }else if (sum >21){
         messageEl.textContent = "Bust -_- You lose"
-        return "newGame"
+        started = false;
+
+
     }else{
         messageEl.textContent = "Do you want to pick new card?"
     }
 }
 
 function newCard(){
+    if(started === false){
+        messageEl.textContent = "Starting new game"
+        startGame();
+    }else{
     let newCard = getRandom();
     card.push(newCard);
-    let result = checkGame();
-    if(result=== "newGame"){
-        messageEl.textContent = "Bust -_- You lose"
-        startGame();
+    checkGame();
     }
 }
